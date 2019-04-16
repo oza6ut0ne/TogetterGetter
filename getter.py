@@ -33,7 +33,7 @@ while True:
             break
 
     pq = pyquery.PyQuery(driver.page_source)
-    for tweet in pq.find('.tweet_wrap .tweet'):
+    for tweet in pq.find('.tweet_box .tweet'):
         print(tweet.text, '\n')
         if args.one_by_one:
             input()
