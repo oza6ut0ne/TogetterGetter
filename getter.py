@@ -18,6 +18,7 @@ if re.match('\d+', args.url):
 try:
     options = Options()
     options.headless = True
+    options.add_argument('--log-level=2')
     driver = selenium.webdriver.Chrome(chrome_options=options)
 except WebDriverException:
     driver = selenium.webdriver.PhantomJS()
@@ -34,9 +35,8 @@ while True:
 
     pq = pyquery.PyQuery(driver.page_source)
     for tweet in pq.find('.tweet_box .tweet'):
-        print(tweet.text, '\n')
-        if args.one_by_one:
-            input()
+        print(tweet.text)
+        input() if args.one_by_one else print()
 
     try:
         next_btn = driver.find_element_by_css_selector('div.pagenation a[rel~=next]')
